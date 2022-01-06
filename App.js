@@ -3,26 +3,42 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 // import {createStackNavigator} from '@react-navigation/stack';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ScreenA from './screens/ScreenA';
 import ScreenB from './screens/ScreenB';
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, size, color}) => {
+          tabBarIcon: ({focused}) => {
             let iconName;
-            if (route.name === 'Screen_A') {
-              iconName = 'airbnb';
-              size = focused ? 22 : 20;
-            } else if (route.name === 'Screen_B') {
-              iconName = 'btc';
-              color = focused ? 'grey' : 'blue';
+            switch (route.name) {
+              case 'Screen_A':
+                iconName = 'affiliatetheme';
+                break;
+              case 'Screen_B':
+                iconName = 'amazon-pay';
+                break;
+              default:
+                break;
             }
-            return <FontAwesome5 name={iconName} size={size} color={color} />;
+            // if (route.name === 'Screen_A') {
+            //   iconName = 'airbnb';
+            // }
+            // if (route.name === 'Screen_B') {
+            //   iconName = 'btc';
+            // }
+            return (
+              <FontAwesome5
+                name={iconName}
+                size={focused ? 22 : 20}
+                color={focused ? 'yellow' : 'pink'}
+              />
+            );
           },
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
